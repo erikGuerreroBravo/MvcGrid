@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AnalisisAcademico" Class="DCGlobalDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-JH1G86M;Initial Catalog=AnalisisAcademico;Persist Security Info=True;User ID=sa" SettingsObjectName="WebGridModel.Properties.Settings" SettingsPropertyName="AnalisisAcademicoConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AlumnoEstatusAcademico" Member="AlumnoEstatusAcademicos">
+    <Type Name="AlumnoEstatusAcademico">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idAlumno" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idEstatusAcademico" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="registroBaja" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="tiempoBaja" Type="System.String" DbType="VarChar(350)" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="EstatusAcademico_AlumnoEstatusAcademico" Member="EstatusAcademico" ThisKey="idEstatusAcademico" OtherKey="id" Type="EstatusAcademico" IsForeignKey="true" />
+      <Association Name="SegUsuario_AlumnoEstatusAcademico" Member="SegUsuario" ThisKey="idAlumno" OtherKey="id" Type="SegUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Asignaturas" Member="Asignaturas">
+    <Type Name="Asignatura">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="asignaturasTotales" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="asignaturasAprobadas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="asignaturasCursar" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="asignaturasReprobadas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="asignaturasRepeticion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idAlumno" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="activacion" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="SegUsuario_Asignatura" Member="SegUsuario" ThisKey="idAlumno" OtherKey="id" Type="SegUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CatAsuntoSolicitud" Member="CatAsuntoSolicituds">
+    <Type Name="CatAsuntoSolicitud">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strValor" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Association Name="CatAsuntoSolicitud_Solicitud" Member="Solicituds" ThisKey="id" OtherKey="idCatAsuntoSolicitud" Type="Solicitud" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CatCarrera" Member="CatCarreras">
+    <Type Name="CatCarrera">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strValor" Type="System.String" DbType="VarChar(350)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="VarChar(450)" CanBeNull="true" />
+      <Column Name="strUrlImg" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Association Name="CatCarrera_SegPersonalAdministrativo" Member="SegPersonalAdministrativos" ThisKey="id" OtherKey="idCatCarrera" Type="SegPersonalAdministrativo" />
+      <Association Name="CatCarrera_SegUsuario" Member="SegUsuarios" ThisKey="id" OtherKey="idCarrera" Type="SegUsuario" />
+    </Type>
+  </Table>
+  <Table Name="dbo.catCarreraAsignaturasCursadas" Member="catCarreraAsignaturasCursadas">
+    <Type Name="catCarreraAsignaturasCursada">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AsignaturasTotales" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AsignaturasAprobadas" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="AsignaturasReprobadas" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="AsignaturasPorCursar" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="AsignaturasRepeticion" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="PorcentajeAvance" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.catCarreraCreditos" Member="catCarreraCreditos">
+    <Type Name="catCarreraCredito">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="creditosTotales" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="creditosReprobados" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="creditosPorCursar" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PorcentajeAvance" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CatStatus" Member="CatStatus">
+    <Type Name="CatStatus">
+      <Column Name="idStatus" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="strObservaciones" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Association Name="CatStatus_Solicitud" Member="Solicituds" ThisKey="idStatus" OtherKey="idStatus" Type="Solicitud" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Creditos" Member="Creditos">
+    <Type Name="Credito">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="creditosTotales" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="creditosAprobados" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="creditosPorCursar" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="idAlumno" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="activacion" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="SegUsuario_Credito" Member="SegUsuario" ThisKey="idAlumno" OtherKey="id" Type="SegUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Documento" Member="Documentos">
+    <Type Name="Documento">
+      <Column Name="idDocumento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strNombre" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="VarChar(450)" CanBeNull="true" />
+      <Column Name="urlDocumento" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Documento_Documento_Solicitud" Member="Documento_Solicituds" ThisKey="idDocumento" OtherKey="idDocumento" Type="Documento_Solicitud" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Documento_Solicitud" Member="Documento_Solicituds">
+    <Type Name="Documento_Solicitud">
+      <Column Name="idSolicitud" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idDocumento" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fechaAsignacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Documento_Documento_Solicitud" Member="Documento" ThisKey="idDocumento" OtherKey="idDocumento" Type="Documento" IsForeignKey="true" />
+      <Association Name="Solicitud_Documento_Solicitud" Member="Solicitud" ThisKey="idSolicitud" OtherKey="idSolicitud" Type="Solicitud" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EspecialAsignaturas" Member="EspecialAsignaturas">
+    <Type Name="EspecialAsignatura">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(450)" CanBeNull="true" />
+      <Column Name="idAlumno" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="SegUsuario_EspecialAsignatura" Member="SegUsuario" ThisKey="idAlumno" OtherKey="id" Type="SegUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EspecialAsignaturasAcreditadas" Member="EspecialAsignaturasAcreditadas">
+    <Type Name="EspecialAsignaturasAcreditada">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="idAlumno" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="SegUsuario_EspecialAsignaturasAcreditada" Member="SegUsuario" ThisKey="idAlumno" OtherKey="id" Type="SegUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EstatusAcademico" Member="EstatusAcademicos">
+    <Type Name="EstatusAcademico">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="descripcion" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Association Name="EstatusAcademico_AlumnoEstatusAcademico" Member="AlumnoEstatusAcademicos" ThisKey="id" OtherKey="idEstatusAcademico" Type="AlumnoEstatusAcademico" />
+    </Type>
+  </Table>
+  <Table Name="dbo.IngresoInstitucional" Member="IngresoInstitucionals">
+    <Type Name="IngresoInstitucional">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="periodoIngreso" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="modoIngreso" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="periodoReinscripcion" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="semestre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="idAlumno" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SegUsuario_IngresoInstitucional" Member="SegUsuario" ThisKey="idAlumno" OtherKey="id" Type="SegUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Mensajes" Member="Mensajes">
+    <Type Name="Mensaje">
+      <Column Name="idMensaje" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idNotificacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idPersonalAdministrativo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="strMensaje" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Notificacione_Mensaje" Member="Notificacione" ThisKey="idNotificacion" OtherKey="idNotificacion" Type="Notificacione" IsForeignKey="true" />
+      <Association Name="SegPersonalAdministrativo_Mensaje" Member="SegPersonalAdministrativo" ThisKey="idPersonalAdministrativo" OtherKey="id" Type="SegPersonalAdministrativo" IsForeignKey="true" />
+      <Association Name="SegUsuario_Mensaje" Member="SegUsuario" ThisKey="idUsuario" OtherKey="id" Type="SegUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Notificaciones" Member="Notificaciones">
+    <Type Name="Notificacione">
+      <Column Name="idNotificacion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idSegPersonal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idSolicitud" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="strNotificacion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Notificacione_Mensaje" Member="Mensajes" ThisKey="idNotificacion" OtherKey="idNotificacion" Type="Mensaje" />
+      <Association Name="SegPersonalAdministrativo_Notificacione" Member="SegPersonalAdministrativo" ThisKey="idSegPersonal" OtherKey="id" Type="SegPersonalAdministrativo" IsForeignKey="true" />
+      <Association Name="Solicitud_Notificacione" Member="Solicitud" ThisKey="idSolicitud" OtherKey="idSolicitud" Type="Solicitud" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SegPerfil" Member="SegPerfils">
+    <Type Name="SegPerfil">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strValor" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="strDescripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="bitEstatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="SegPerfil_SegPersonalAdministrativo" Member="SegPersonalAdministrativos" ThisKey="id" OtherKey="idSegPerfil" Type="SegPersonalAdministrativo" />
+      <Association Name="SegPerfil_SegUsuario" Member="SegUsuarios" ThisKey="id" OtherKey="idSegPerfil" Type="SegUsuario" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SegPersonalAdministrativo" Member="SegPersonalAdministrativos">
+    <Type Name="SegPersonalAdministrativo">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strNombre" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="strApellidoPaterno" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="strApellidoMaterno" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="strMail" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="strFotoUrl" Type="System.String" DbType="VarChar(900)" CanBeNull="true" />
+      <Column Name="strTelefonoInstitucional" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="strExtension" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="idSegPerfil" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idCatCarrera" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="strNombreUsuario" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="strPassword" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="foto" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="SegPersonalAdministrativo_Mensaje" Member="Mensajes" ThisKey="id" OtherKey="idPersonalAdministrativo" Type="Mensaje" />
+      <Association Name="SegPersonalAdministrativo_Notificacione" Member="Notificaciones" ThisKey="id" OtherKey="idSegPersonal" Type="Notificacione" />
+      <Association Name="CatCarrera_SegPersonalAdministrativo" Member="CatCarrera" ThisKey="idCatCarrera" OtherKey="id" Type="CatCarrera" IsForeignKey="true" />
+      <Association Name="SegPerfil_SegPersonalAdministrativo" Member="SegPerfil" ThisKey="idSegPerfil" OtherKey="id" Type="SegPerfil" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Seguimiento" Member="Seguimientos">
+    <Type Name="Seguimiento">
+      <Column Name="idBit" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idSegUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bitEtapaUno" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bitEtapaDos" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bitEtapaTres" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bitEtapaCuatro" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="bitEtapaCinco" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="SegUsuario_Seguimiento" Member="SegUsuario" ThisKey="idSegUsuario" OtherKey="id" Type="SegUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SegUsuarios" Member="SegUsuarios">
+    <Type Name="SegUsuario">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="strNombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="strAPaterno" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="strAMaterno" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="strPlanEstudios" Type="System.String" DbType="VarChar(350)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="strUsuario" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="strPassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="strMatricula" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="strSemestreActual" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="strTelefono" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="idSegPerfil" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="foto" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="idCarrera" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SegUsuario_AlumnoEstatusAcademico" Member="AlumnoEstatusAcademicos" ThisKey="id" OtherKey="idAlumno" Type="AlumnoEstatusAcademico" />
+      <Association Name="SegUsuario_Asignatura" Member="Asignaturas" ThisKey="id" OtherKey="idAlumno" Type="Asignatura" />
+      <Association Name="SegUsuario_Credito" Member="Creditos" ThisKey="id" OtherKey="idAlumno" Type="Credito" />
+      <Association Name="SegUsuario_EspecialAsignatura" Member="EspecialAsignaturas" ThisKey="id" OtherKey="idAlumno" Type="EspecialAsignatura" />
+      <Association Name="SegUsuario_EspecialAsignaturasAcreditada" Member="EspecialAsignaturasAcreditadas" ThisKey="id" OtherKey="idAlumno" Type="EspecialAsignaturasAcreditada" />
+      <Association Name="SegUsuario_IngresoInstitucional" Member="IngresoInstitucionals" ThisKey="id" OtherKey="idAlumno" Type="IngresoInstitucional" />
+      <Association Name="SegUsuario_Mensaje" Member="Mensajes" ThisKey="id" OtherKey="idUsuario" Type="Mensaje" />
+      <Association Name="SegUsuario_Seguimiento" Member="Seguimientos" ThisKey="id" OtherKey="idSegUsuario" Type="Seguimiento" />
+      <Association Name="SegUsuario_Solicitud" Member="Solicituds" ThisKey="id" OtherKey="idAlumno" Type="Solicitud" />
+      <Association Name="SegUsuario_SolicitudDeAlumno" Member="SolicitudDeAlumnos" ThisKey="id" OtherKey="idAlumno" Type="SolicitudDeAlumno" />
+      <Association Name="CatCarrera_SegUsuario" Member="CatCarrera" ThisKey="idCarrera" OtherKey="id" Type="CatCarrera" IsForeignKey="true" />
+      <Association Name="SegPerfil_SegUsuario" Member="SegPerfil" ThisKey="idSegPerfil" OtherKey="id" Type="SegPerfil" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Solicitud" Member="Solicituds">
+    <Type Name="Solicitud">
+      <Column Name="idSolicitud" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idCatAsuntoSolicitud" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="motivos" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="fechaSolicitud" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="idStatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="folioSolicitud" Type="System.String" DbType="VarChar(450)" CanBeNull="true" />
+      <Column Name="idAlumno" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Solicitud_Documento_Solicitud" Member="Documento_Solicituds" ThisKey="idSolicitud" OtherKey="idSolicitud" Type="Documento_Solicitud" />
+      <Association Name="Solicitud_Notificacione" Member="Notificaciones" ThisKey="idSolicitud" OtherKey="idSolicitud" Type="Notificacione" />
+      <Association Name="Solicitud_SolicitudDeAlumno" Member="SolicitudDeAlumnos" ThisKey="idSolicitud" OtherKey="idSolicitud" Type="SolicitudDeAlumno" />
+      <Association Name="CatAsuntoSolicitud_Solicitud" Member="CatAsuntoSolicitud" ThisKey="idCatAsuntoSolicitud" OtherKey="id" Type="CatAsuntoSolicitud" IsForeignKey="true" />
+      <Association Name="CatStatus_Solicitud" Member="CatStatus" ThisKey="idStatus" OtherKey="idStatus" Type="CatStatus" IsForeignKey="true" />
+      <Association Name="SegUsuario_Solicitud" Member="SegUsuario" ThisKey="idAlumno" OtherKey="id" Type="SegUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SolicitudDeAlumno" Member="SolicitudDeAlumnos">
+    <Type Name="SolicitudDeAlumno">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idSolicitud" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idAlumno" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fechaAprovacion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="comentarios" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="SegUsuario_SolicitudDeAlumno" Member="SegUsuario" ThisKey="idAlumno" OtherKey="id" Type="SegUsuario" IsForeignKey="true" />
+      <Association Name="Solicitud_SolicitudDeAlumno" Member="Solicitud" ThisKey="idSolicitud" OtherKey="idSolicitud" Type="Solicitud" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
